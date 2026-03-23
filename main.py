@@ -4,13 +4,15 @@ Team League Organizer
 Fetches team ELO ratings and organizes them into leagues with country-based
 distribution limits.
 """
+from flask import Flask
+from datetime import datetime
 import csv
 from dataclasses import dataclass
-from datetime import datetime
 from typing import Dict, List
 from io import StringIO
-
 import requests
+
+app = Flask(__name__)
 
 
 # Configuration constants
@@ -136,31 +138,43 @@ def print_country_distribution(country_counts: Dict[str, int]) -> None:
         print(f"{country}: {count}")
 
 
-def main():
-    """Main execution function."""
-    # Fetch and parse data
+def format_league(league_name: str, teams: List[Team], groups: int) -> str:
+    lines = [f"\n{league_name} league teams:\n"]
+    teams_per_pot = len(teams) // groups
+    for i, team in enumerate(teams):
+        if i % teams_per_pot == 0:
+            pot_number = (i // teams_per_pot) + 1
+            lines.append(f"Pot {pot_number}")
+        lines.append(f"  {team.name}")
+    return "\n".join(lines)
+
+
+def format_country_distribution(country_counts: Dict[str, int]) -> str:
+    lines = ['\n\nTeams per country:']
+    for country, count in sorted(country_counts.items()):
+        lines.append(f"{country}: {count}")
+    return "\n".join(lines)
+
+
+@app.route("/")
+def index():
     today = datetime.today().strftime('%Y-%m-%d')
     csv_content = fetch_team_data(today)
     all_teams = parse_teams(csv_content)
-    
-    # Select teams
+
     selector = TeamSelector(MAX_TEAMS_PER_COUNTRY, EXCLUDED_COUNTRIES)
     total_teams_needed = TEAMS_PER_LEAGUE * len(LEAGUES)
     selected_teams = select_teams_for_leagues(all_teams, total_teams_needed, selector)
-    
-    # Check if we got enough teams
-    if len(selected_teams) < total_teams_needed:
-        print(f"Warning: Only selected {len(selected_teams)} teams out of {total_teams_needed} needed")
-    
-    # Organize into leagues
+
     leagues = organize_into_leagues(selected_teams, TEAMS_PER_LEAGUE)
-    
-    # Print results
+
+    output = []
     for league_name in LEAGUES:
-        print_league(league_name, leagues[league_name], GROUPS_PER_LEAGUE)
-    
-    print_country_distribution(selector.country_counts)
+        output.append(format_league(league_name, leagues[league_name], GROUPS_PER_LEAGUE))
+    output.append(format_country_distribution(selector.country_counts))
+
+    return "<pre>" + "\n".join(output) + "</pre>"
 
 
-if __name__ == '__main__':
-    main()
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=8080)
