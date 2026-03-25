@@ -6,6 +6,8 @@ steps:
   - name: build
     image: docker:cli
     commands:
+      - ls -la
+      - ls -la /bash-pipelines-helpers
       - ./bash-pipelines-helpers/build-image-dev.sh
   - name: release
     image: docker:cli
