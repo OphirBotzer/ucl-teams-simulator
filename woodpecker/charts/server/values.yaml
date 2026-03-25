@@ -34,13 +34,13 @@ env:
   WOODPECKER_ESCALATE: 'docker:dind'
   WOODPECKER_OPEN: 'true'
   WOODPECKER_GITHUB: 'true'
-  WOODPECKER_GITHUB_CLIENT: Ov23likR7rg0MLsgKep0
-  WOODPECKER_ADMIN: 'woodpecker,admin'
-  WOODPECKER_HOST: 'https://hellishly-identifiable-mercy.ngrok-free.dev/'
+  WOODPECKER_GITHUB_CLIENT: 'Ov23likR7rg0MLsgKep0'
+  WOODPECKER_ADMIN: 'woodpecker,admin,OphirBotzer'
+  WOODPECKER_HOST: 'https://hellishly-identifiable-mercy.ngrok-free.dev'
 
 # -- Add extra environment variables from the secrets list
 extraSecretNamesForEnvFrom:
-  - woodpecker-github-secret-v1
+  - woodpecker-github-secret-v3
 
 # whether to create the default WOODPECKER_AGENT_SECRET in woodpecker-default-agent-secret
 createAgentSecret: true
