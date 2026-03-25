@@ -4,13 +4,13 @@ when:
 
 steps:
   - name: build
-    image: docker:cli
+    image: docker:dind
     commands:
       - pwd
       - ls -la
       - ls -la bash-pipelines-helpers/
       - /bin/sh -c bash-pipelines-helpers/build-image-dev.sh
   - name: release
-    image: docker:cli
+    image: docker:dind
     commands:
       - ./bash-pipelines-helpers/release-image.sh
