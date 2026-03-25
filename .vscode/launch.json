@@ -15,7 +15,18 @@
       "runtimeExecutable": "bash",
       "runtimeArgs": ["${workspaceFolder}/bash-pipelines-helpers/build-image-dev.sh"],
       "console": "integratedTerminal",
-      "cwd": "${workspaceFolder}"
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}/.env/script-running"
+    },
+    {
+      "name": "Run Release Script",
+      "type": "node",
+      "request": "launch",
+      "runtimeExecutable": "bash",
+      "runtimeArgs": ["${workspaceFolder}/bash-pipelines-helpers/release-image.sh"],
+      "console": "integratedTerminal",
+      "cwd": "${workspaceFolder}",
+      "envFile": "${workspaceFolder}/.env/script-running"
     }
   ]
 }

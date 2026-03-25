@@ -10,4 +10,4 @@ steps:
   - name: release
     image: docker:cli
     commands:
-      - docker load *.tar
+      - ./bash-pipelines-helpers/release-image.sh
