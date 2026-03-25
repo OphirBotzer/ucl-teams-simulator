@@ -5,16 +5,10 @@ when:
 steps:
   - name: build
     image: gcr.io/kaniko-project/executor:debug
-    privileged: true
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
     commands:
       - ./bash-pipelines-helpers/build-image-dev.sh
 
   - name: release
     image: dgcr.io/kaniko-project/executor:debug
-    privileged: true
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
     commands:
       - ./bash-pipelines-helpers/release-image.sh
