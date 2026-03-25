@@ -1,6 +1,6 @@
-#!/bin/bash
+#! /bin/sh
 
-/bin/bash -c ./bash-pipelines-helpers/configure-git.sh
+/bin/sh -c ./bash-pipelines-helpers/configure-git.sh
 latest_commit_hash=$(git rev-parse HEAD)
 image_id=$(docker build -t ucl-team-simulator:tmp .)
 docker_sha=$(docker images --no-trunc --quiet ucl-team-simulator:tmp | sed 's/sha256://')

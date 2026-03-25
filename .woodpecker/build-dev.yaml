@@ -9,7 +9,7 @@ steps:
       - pwd
       - ls -la
       - ls -la bash-pipelines-helpers/
-      - /bin/bash -c bash-pipelines-helpers/build-image-dev.sh
+      - /bin/sh -c bash-pipelines-helpers/build-image-dev.sh
   - name: release
     image: docker:cli
     commands:
