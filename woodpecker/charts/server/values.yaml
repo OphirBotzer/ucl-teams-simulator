@@ -31,17 +31,15 @@ image:
 
 # -- Add environment variables for the server component
 env:
+  WOODPECKER_OPEN: 'true'
+  WOODPECKER_GITHUB: 'true'
+  WOODPECKER_GITHUB_CLIENT: Ov23likR7rg0MLsgKep0
   WOODPECKER_ADMIN: 'woodpecker,admin'
-  WOODPECKER_HOST: 'https://xxxxxxx'
-  # WOODPECKER_GITHUB: "true"
-  # WOODPECKER_DATABASE_DATASOURCE:
-  #   valueFrom:
-  #     secretKeyRef:
-  #       name: woodpecker-database-secret
-  #       key: datasource
+  WOODPECKER_HOST: 'https://hellishly-identifiable-mercy.ngrok-free.dev/'
 
 # -- Add extra environment variables from the secrets list
-extraSecretNamesForEnvFrom: []
+extraSecretNamesForEnvFrom:
+  - woodpecker-github-secret-v1
 
 # whether to create the default WOODPECKER_AGENT_SECRET in woodpecker-default-agent-secret
 createAgentSecret: true
