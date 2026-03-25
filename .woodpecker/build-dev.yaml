@@ -1,0 +1,13 @@
+when:
+ - event: push
+   branch: dev
+
+steps:
+  - name: build
+    image: docker:cli
+    commands:
+      - ./bash-pipelines-helpers/build-image-dev.sh
+  - name: release
+    image: docker:cli
+    commands:
+      - ./bash-pipelines-helpers/release-image.sh
