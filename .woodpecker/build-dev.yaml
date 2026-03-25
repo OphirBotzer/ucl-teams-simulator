@@ -4,7 +4,7 @@ when:
 
 steps:
   - name: build
-    image: docker:latest
+    image: gcr.io/kaniko-project/executor:debug
     privileged: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -12,7 +12,7 @@ steps:
       - ./bash-pipelines-helpers/build-image-dev.sh
 
   - name: release
-    image: docker:latest
+    image: dgcr.io/kaniko-project/executor:debug
     privileged: true
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
