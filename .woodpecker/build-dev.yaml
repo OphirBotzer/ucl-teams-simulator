@@ -11,7 +11,7 @@ steps:
     commands:
       - ./bash-pipelines-helpers/build-image-dev.sh
 
-  - name: build
+  - name: release
     image: docker:latest
     privileged: true
     volumes:
