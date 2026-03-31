@@ -4,11 +4,11 @@ when:
 
 steps:
   - name: build
-    image: gcr.io/kaniko-project/executor:debug
+    image: mcr.microsoft.com/devcontainers/base:bullseye
     commands:
       - ./bash-pipelines-helpers/build-image-dev.sh
 
   - name: release
-    image: dgcr.io/kaniko-project/executor:debug
+    image: mcr.microsoft.com/devcontainers/base:bullseye
     commands:
       - ./bash-pipelines-helpers/release-image.sh
