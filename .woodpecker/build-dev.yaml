@@ -4,11 +4,15 @@ when:
 
 steps:
   - name: build
-    image: mcr.microsoft.com/devcontainers/base:bullseye
+    image: docker:24.0-cli
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     commands:
       - ./bash-pipelines-helpers/build-image-dev.sh
 
   - name: release
-    image: mcr.microsoft.com/devcontainers/base:bullseye
+    image: docker:24.0-cli
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     commands:
       - ./bash-pipelines-helpers/release-image.sh

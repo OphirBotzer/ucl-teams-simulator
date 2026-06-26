@@ -192,7 +192,7 @@ server:
 
   # -- Add environment variables for the server component
   env:
-    WOODPECKER_ESCALATE: 'docker:dind'
+    WOODPECKER_ESCALATE: 'docker:dind,docker:*'
     WOODPECKER_OPEN: 'true'
     WOODPECKER_GITHUB: 'true'
     WOODPECKER_GITHUB_CLIENT: 'Ov23likR7rg0MLsgKep0'
