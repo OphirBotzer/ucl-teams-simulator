@@ -105,7 +105,7 @@ spec:
         - name: docker-socket
           hostPath:
             path: /var/run/docker.sock
-            type: Socket
+            type: ""
       {{- if or (and (.Values.persistence.enabled) (.Values.persistence.existingClaim)) (.Values.extraVolumeMounts) }}
         {{- if .Values.persistence.enabled }}
         {{- if .Values.persistence.existingClaim }}
