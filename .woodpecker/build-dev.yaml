@@ -5,12 +5,16 @@ when:
 steps:
   - name: build
     image: docker:24.0-cli
+    volumes:
+      - name: docker-socket
+        mountPath: /var/run/docker.sock
     commands:
       - ./bash-pipelines-helpers/build-image-dev.sh
 
   - name: release
     image: docker:24.0-cli
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - name: docker-socket
+        mountPath: /var/run/docker.sock
     commands:
       - ./bash-pipelines-helpers/release-image.sh 
